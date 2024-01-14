@@ -1,3 +1,5 @@
+drop table if exists materiais;
+
 drop table if exists categorias;
 
 drop table if exists produtos;
@@ -10,6 +12,13 @@ drop table if exists pedidos;
 
 drop table if exists pedidos_produtos;
 
+
+create table materiais (
+  id serial primary key,
+  nome text not null unique,
+  custo decimal not null
+);
+
 create table categorias (
 	id serial primary key,
   descricao text not null
@@ -18,13 +27,16 @@ create table categorias (
 create table produtos (
 	id serial primary key,
   nome text not null unique,
+  tamanho text not null,
   descricao text not null,
-  custo int not null,
-  valor int not null,
-  imagem text not null,
+  custo decimal not null,
+  preco_sugerido decimal not null,
+  preco_final decimal,
+  imagem text,
   categorias_id int not null,
   foreign key (categorias_id) references categorias (id)
 );
+
 
 create table usuarios (
 	id serial primary key,
